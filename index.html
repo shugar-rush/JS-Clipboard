@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Setup up copy to clipboard | Bootstrap 5 |  JS</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body class="bg-secondary">
+    
+    <header>
+      <!-- place navbar here -->
+      <h1 class="text-center">Source Text</h1>      
+    </header>
+    <main class="d-flex flex-column justify-content-center container">
+      <textarea name="copyTxt" id="" cols="50" rows="5">Hello and welcome... Erase me and use me... you can write down whatever you want and move your text down below to the next textarea</textarea><br>
+      <div class="d-flex gap-3 justify-content-center pb-4">
+        <button class="moverBtn bg-primary text-white">Move Text</button>
+        <button class="copyBtn bg-primary text-white">Copy Text</button><br>
+      </div>
+      <textarea name="finalTxt" id="" cols="50" rows="5"></textarea>
+      <div class="output"></div>
+    </main>
+    <script>
+      // we will select the elements to create an object format
+      const copyTxt = document.querySelector("textarea[name=copyTxt]");
+      const finalTxt = document.querySelector("textarea[name=finalTxt]");
+      const moverBtn = document.querySelector(".moverBtn");
+      const copyBtn = document.querySelector(".copyBtn");
+      const output = document.querySelector(".outBtn");
+
+      //interaction to elements
+      moverBtn.addEventListener("click",moveText);
+      copyBtn.addEventListener("click",copyText);
+      finalTxt.addEventListener("click",selAll);
+
+      function selAll() {
+        this.select();
+      }
+
+      function copyText(){
+        let temp = copyTxt.value;
+        copytoClipBoard(temp);
+      }
+      
+      function copytoClipBoard(str){
+        const textarea = document.createElement("textarea");
+        textarea.value = str;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        output.innerHTML = "<h3>Copied content</h3>"+textarea.value;
+        console.log(textarea);
+      }
+      
+      
+      function moveText(){
+        let temp = copyTxt.value;
+        finalTxt.value = temp;
+      }
+    </script>
+    <footer>
+      <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
